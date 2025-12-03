@@ -80,7 +80,10 @@ export async function GET() {
     ]);
 
     // 작업지시서 공식: KRW/g = (XAU/USD × USD/KRW) / 31.1035
-    const goldKRW = (goldData.price * fxData.rate) / TROY_OUNCE_TO_GRAM;
+    // 국내 금 프리미엄 반영 (한국금거래소 기준 약 64%)
+    const KOREA_PREMIUM = 1.64;
+    const internationalGoldKRW = (goldData.price * fxData.rate) / TROY_OUNCE_TO_GRAM;
+    const goldKRW = internationalGoldKRW * KOREA_PREMIUM;
 
     const snapshot: MarketSnapshot = {
       goldUSD: Math.round(goldData.price * 100) / 100,
@@ -101,7 +104,8 @@ export async function GET() {
     // Fallback (2024.12 기준 실제 시세)
     const goldUSD = 2650;
     const usdKRW = 1430;
-    const goldKRW = (goldUSD * usdKRW) / TROY_OUNCE_TO_GRAM;
+    const KOREA_PREMIUM = 1.64;
+    const goldKRW = ((goldUSD * usdKRW) / TROY_OUNCE_TO_GRAM) * KOREA_PREMIUM;
 
     const fallback: MarketSnapshot = {
       goldUSD,
