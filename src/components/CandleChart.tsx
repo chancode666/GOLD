@@ -43,17 +43,21 @@ export default function CandleChart() {
         timeVisible: timeframe === "1H",
         secondsVisible: false,
       },
+      localization: {
+        locale: "ko-KR",
+        dateFormat: "yyyy-MM-dd",
+      },
     });
 
     chartRef.current = chart;
 
     const candleSeries = chart.addSeries(CandlestickSeries, {
-      upColor: "#22c55e",
-      downColor: "#ef4444",
-      borderUpColor: "#22c55e",
-      borderDownColor: "#ef4444",
-      wickUpColor: "#22c55e",
-      wickDownColor: "#ef4444",
+      upColor: "#ef4444",
+      downColor: "#3b82f6",
+      borderUpColor: "#ef4444",
+      borderDownColor: "#3b82f6",
+      wickUpColor: "#ef4444",
+      wickDownColor: "#3b82f6",
     });
 
     const fetchCandles = async () => {
